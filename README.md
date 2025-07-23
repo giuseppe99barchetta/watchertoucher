@@ -70,28 +70,35 @@ python watchertoucher.py
 
 ---
 
-### Using Docker
-
-Build and run via Docker Compose:
-
-1. Edit `.env` with your configuration.
-
-2. Edit `docker-compose.yml` to mount your media folder correctly.
-
-3. Run:
+### Using Docker-Compose
 
 ```bash
-docker compose up -d
-```
+version: '3.8'
 
----
+services:
+  watchertoucher:
+    image: ciuse99/watchertoucher:latest  # Change to your Docker Hub username if different
+    container_name: watchertoucher
+    environment:
+      - JELLYFIN_URL=http://127.0.0.1:8096
+      - JELLYFIN_API_KEY=youyr_api_key
+      - LOG_TO_FILE=false
+      - LOG_TO_STDOUT=true
+      - DELAY_SECONDS=60
+      - POLL_TIMEOUT=5
+      - TZ=Europe/Rome
+    volumes:
+      - your/library/path:/data:ro   # Replace with your actual media library folder (read-only)
+      - ./logs:/var/log                # Local folder for logs if LOG_TO_FILE is true
+    restart: unless-stopped
+
+```
 
 ## Supported file types
 
 - Video: `.mkv`, `.mp4`, `.avi`, `.m4v`, `.mov`, `.ts`, `.vob`, `.webm`
 - Audio: `.mp3`, `.mp2`, `.ogg`, `.flac`, `.m4a`
 - Subtitles: `.srt`, `.sub`, `.ass`, `.idx`, `.smi`
-
 
 
 ## License
