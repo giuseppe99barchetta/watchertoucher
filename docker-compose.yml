@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  watchertoucher:
+    image: ciuse99/watchertoucher:latest  # Change to your Docker Hub username if different
+    container_name: watchertoucher
+    env_file:
+      - .env
+    volumes:
+      - /your/local/media/library:/data:ro   # Replace with your actual media library folder (read-only)
+      - ./logs:/var/log                      # Local folder for logs if LOG_TO_FILE is true
+    restart: unless-stopped
