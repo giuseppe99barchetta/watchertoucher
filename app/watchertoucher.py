@@ -14,7 +14,7 @@ load_dotenv()
 # Configuration from environment
 JELLYFIN_URL = os.getenv("JELLYFIN_URL", "http://127.0.0.1:8096")
 API_KEY = os.getenv("JELLYFIN_API_KEY", "")
-MEDIA_FOLDER = os.getenv("MEDIA_FOLDER", "/mediaserver/libraries/")
+MEDIA_FOLDER = os.getenv("MEDIA_FOLDER", "/data")
 LOG_TO_FILE = os.getenv("LOG_TO_FILE", "true").lower() == "true"
 LOG_TO_STDOUT = os.getenv("LOG_TO_STDOUT", "true").lower() == "true"
 LOGFILE = os.getenv("LOGFILE", "/var/log/watchertoucher.log")
